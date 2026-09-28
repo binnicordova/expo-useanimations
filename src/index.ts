@@ -1,4 +1,15 @@
-// Reexport the native module. On web, it will be resolved to ExpoUseanimationsModule.web.ts
-// and on native platforms to ExpoUseanimationsModule.ts
-export { default } from './ExpoUseanimationsModule';
-export * from './ExpoUseanimations.types';
+import UseAnimations from './UseAnimations';
+
+export default UseAnimations;
+export { UseAnimations };
+export { recolor, toLottieColor } from './utils/colors';
+export { animationKeys } from './keys';
+export type { AnimationKey } from './keys';
+export type {
+  Animation,
+  AnimationEffect,
+  EventProps,
+  LottieJSON,
+  UseAnimationsHandle,
+  UseAnimationsProps,
+} from './types';

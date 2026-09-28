@@ -3,8 +3,17 @@
   "compilerOptions": {
     "strict": true,
     "paths": {
-      "expo-useanimations": ["../src/index"],
-      "expo-useanimations/*": ["../src/*"]
+      "expo-useanimations": [
+        "../src/index"
+      ],
+      "expo-useanimations/*": [
+        "../src/*"
+      ]
     }
-  }
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "../src/typings/*.d.ts"
+  ]
 }

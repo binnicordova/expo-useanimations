@@ -1,44 +1,103 @@
 {
   "name": "expo-useanimations",
   "version": "0.1.0",
-  "description": "My new module",
+  "description": "79 animated micro-interaction icons (useAnimations) for Expo & React Native. iOS, Android and web. Works in Expo Go and with EAS Update: zero native code.",
   "main": "build/index.js",
   "types": "build/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./build/index.d.ts",
+      "default": "./build/index.js"
+    },
+    "./all": {
+      "types": "./build/all.d.ts",
+      "default": "./build/all.js"
+    },
+    "./lib/*": {
+      "types": "./build/lib/*/index.d.ts",
+      "default": "./build/lib/*/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "build",
+    "src",
+    "!**/__tests__",
+    "!**/__mocks__",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "sideEffects": false,
   "scripts": {
     "build": "node internal/module_scripts/build.js",
     "clean": "node internal/module_scripts/clean.js",
+    "generate": "node scripts/generate.mjs",
+    "typecheck": "tsc --noEmit",
     "lint": "eslint src/",
-    "test": "node internal/module_scripts/test.js",
+    "test": "jest",
     "prepare": "node internal/module_scripts/prepare.js",
-    "open:ios": "node internal/module_scripts/open-ios.js",
-    "open:android": "node internal/module_scripts/open-android.js"
+    "prepublishOnly": "bun run typecheck && bun run test && node internal/module_scripts/prepare.js"
   },
   "keywords": [
     "react-native",
     "expo",
-    "expo-useanimations",
-    "ExpoUseanimations"
+    "expo-go",
+    "expo-updates",
+    "lottie",
+    "animated-icons",
+    "icons",
+    "micro-interactions",
+    "useanimations",
+    "react-useanimations",
+    "ios",
+    "android",
+    "web"
   ],
-  "repository": "https://github.com/claude/expo-useanimations",
-  "bugs": {
-    "url": "https://github.com/claude/expo-useanimations/issues"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/binnicordova/expo-useanimations.git"
   },
-  "author": "Claude <noreply@anthropic.com> (https://github.com/claude)",
+  "bugs": {
+    "url": "https://github.com/binnicordova/expo-useanimations/issues"
+  },
+  "homepage": "https://github.com/binnicordova/expo-useanimations#readme",
+  "author": "Binni Cordova <binni.2000.cordova@gmail.com> (https://github.com/binnicordova)",
+  "contributors": [
+    "Tuan Phung (original useAnimations icons)",
+    "Marek Feikus (original react-useanimations)"
+  ],
   "license": "MIT",
-  "homepage": "https://github.com/claude/expo-useanimations#readme",
-  "dependencies": {},
+  "dependencies": {
+    "@react-native/normalize-colors": ">=0.74.0",
+    "lottie-web": "^5.13.0",
+    "react-useanimations": "^2.10.0"
+  },
+  "peerDependencies": {
+    "expo": ">=58.0.0-0",
+    "lottie-react-native": ">=7.0.0",
+    "react": "*",
+    "react-native": "*"
+  },
+  "peerDependenciesMeta": {
+    "expo": {
+      "optional": true
+    }
+  },
   "devDependencies": {
     "@babel/core": "^7.26.0",
-    "@types/jest": "^29.2.1",
-    "@types/react": "~19.1.1",
-    "babel-preset-expo": "~55.0.8",
+    "@types/jest": "^29.5.14",
+    "@types/react": "~19.3.0",
+    "babel-preset-expo": "~58.0.5",
     "eslint": "~9.39.4",
     "eslint-config-universe": "^15.0.3",
-    "expo": "^57.0.25",
+    "expo": "~58.0.0-preview.8",
     "jest": "^29.7.0",
-    "jest-expo": "~55.0.9",
+    "jest-expo": "~58.0.4",
+    "lottie-react-native": "~7.5.0",
     "prettier": "^3.0.0",
-    "react-native": "0.82.1",
+    "react": "19.3.0",
+    "react-native": "0.88.0-rc.2",
     "typescript": "^5.9.2"
   },
   "jest": {
@@ -47,9 +106,7 @@
       "<rootDir>/src"
     ]
   },
-  "peerDependencies": {
-    "expo": "*",
-    "react": "*",
-    "react-native": "*"
+  "publishConfig": {
+    "access": "public"
   }
 }

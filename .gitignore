@@ -55,3 +55,9 @@ yarn-error.log
 
 # Expo
 .expo/*
+
+# Build output & packs
+*.tgz
+example/dist/
+example/ios/
+example/android/
