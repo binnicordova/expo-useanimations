@@ -1,0 +1,10 @@
+{
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "strict": true,
+    "paths": {
+      "expo-useanimations": ["../src/index"],
+      "expo-useanimations/*": ["../src/*"]
+    }
+  }
+}
