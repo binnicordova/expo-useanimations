@@ -20,6 +20,8 @@ const LottiePlayer = forwardRef<PlayerHandle, PlayerProps>(function LottiePlayer
     () => ({
       // lottie-react-native plays in reverse when `from > to` on both platforms.
       playSegment: (from, to) => lottie.current?.play(from, to),
+      // Playing a zero-length segment parks the animation on that frame on iOS and Android.
+      goToFrame: (frame) => lottie.current?.play(frame, frame),
       reset: () => lottie.current?.reset(),
       stop: () => lottie.current?.reset(),
     }),

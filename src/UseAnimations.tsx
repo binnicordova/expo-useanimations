@@ -96,6 +96,18 @@ function UseAnimationsImpl(
     [playForward, playBackwards, toggle, reset]
   );
 
+  // Recolouring (or swapping the animation) rebuilds the player on its first frame.
+  // Put toggle icons back on their end frame so e.g. a checked checkbox stays checked.
+  const firstData = useRef(data);
+  useEffect(() => {
+    if (data === firstData.current) return;
+    firstData.current = data;
+    playingForward.current = false;
+    pendingBackwards.current = false;
+    // `op` is exclusive in Lottie: the last visible frame is `op - 1`.
+    if (atEnd.current && !isLoop) player.current?.goToFrame(Math.max(first, last - 1));
+  }, [data, first, last, isLoop]);
+
   // `reverse` = "should rest on the end state". Works both as an initial value and as a
   // controlled prop: it only animates when the visual state and the prop disagree.
   useEffect(() => {

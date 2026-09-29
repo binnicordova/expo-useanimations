@@ -36,6 +36,8 @@ const LottiePlayer = forwardRef<PlayerHandle, PlayerProps>(function LottiePlayer
 ) {
   const container = useRef<any>(null);
   const anim = useRef<AnimationItem | null>(null);
+  /** Command issued before lottie-web finished building the SVG; replayed on `DOMLoaded`. */
+  const pending = useRef<((item: AnimationItem) => void) | null>(null);
   const finishRef = useRef(onAnimationFinish);
   finishRef.current = onAnimationFinish;
   // Read options through a ref so an inline object doesn't rebuild the animation every render.
@@ -65,10 +67,17 @@ const LottiePlayer = forwardRef<PlayerHandle, PlayerProps>(function LottiePlayer
     });
     item.setSpeed(speed);
     const onComplete = () => finishRef.current?.(false);
+    const onLoaded = () => {
+      const command = pending.current;
+      pending.current = null;
+      command?.(item);
+    };
     item.addEventListener('complete', onComplete);
+    item.addEventListener('DOMLoaded', onLoaded);
     anim.current = item;
     return () => {
       item.removeEventListener('complete', onComplete);
+      item.removeEventListener('DOMLoaded', onLoaded);
       item.destroy();
       anim.current = null;
     };
@@ -81,15 +90,19 @@ const LottiePlayer = forwardRef<PlayerHandle, PlayerProps>(function LottiePlayer
 
   useEffect(() => upsertPathCss(svgId, pathCss), [svgId, pathCss]);
 
-  useImperativeHandle(
-    ref,
-    () => ({
-      playSegment: (from, to) => anim.current?.playSegments([from, to], true),
-      reset: () => anim.current?.goToAndStop(0, true),
-      stop: () => anim.current?.stop(),
-    }),
-    []
-  );
+  useImperativeHandle(ref, () => {
+    const run = (command: (item: AnimationItem) => void) => {
+      const item = anim.current;
+      if (item?.isLoaded) command(item);
+      else pending.current = command;
+    };
+    return {
+      playSegment: (from, to) => run((item) => item.playSegments([from, to], true)),
+      goToFrame: (frame) => run((item) => item.goToAndStop(frame, true)),
+      reset: () => run((item) => item.goToAndStop(0, true)),
+      stop: () => run((item) => item.stop()),
+    };
+  }, []);
 
   return (
     <View ref={container} style={[{ width: size, height: size, overflow: 'hidden' }, style]} />

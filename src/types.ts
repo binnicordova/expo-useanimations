@@ -69,6 +69,8 @@ export type PlayerProps = {
 
 export type PlayerHandle = {
   playSegment: (from: number, to: number) => void;
+  /** Jump to a frame without animating. */
+  goToFrame: (frame: number) => void;
   reset: () => void;
   stop: () => void;
 };
