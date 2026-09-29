@@ -1,7 +1,3 @@
-<p align="center">
-  <img src="https://raw.githubusercontent.com/binnicordova/expo-useanimations/main/docs/images/hero.png" alt="expo-useanimations — 79 animated icons for Expo · iOS · Android · Web. Created by Binni Cordova · BinniCordova.com" width="100%" />
-</p>
-
 <h1 align="center">expo-useanimations</h1>
 
 <p align="center">
@@ -324,10 +320,6 @@ Publishing: `bun run prepublishOnly && npm publish`.
 
 ## About the creator
 
-<p align="center">
-  <a href="https://binnicordova.com"><img src="https://raw.githubusercontent.com/binnicordova/expo-useanimations/main/docs/images/creator-card.png" alt="Built by Binni Cordova · BinniCordova.com" width="720" /></a>
-</p>
-
 **expo-useanimations** is designed and maintained by **[Binni Cordova](https://binnicordova.com)** — mobile engineer focused on Expo and React Native apps that ship fast and feel great.
 
 - 🌐 Website: **[BinniCordova.com](https://binnicordova.com)**
@@ -339,4 +331,3 @@ If this package saves you time, ⭐ the repo and share it — it genuinely helps
 
 - Animations are designed by **[useAnimations](https://useanimations.com)** and are consumed from the official [`react-useanimations`](https://www.npmjs.com/package/react-useanimations) package — this package does **not** copy or redistribute the animation files. The artwork is licensed by useAnimations under **[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)** with [their own terms](https://github.com/useAnimations/react-useanimations/blob/master/LICENSE); **credit / link to [useanimations.com](https://useanimations.com)** in apps that use it.
 - The `expo-useanimations` source code (component, players, colouring, types, tooling) is **MIT** © [Binni Cordova](https://binnicordova.com) — see [LICENSE](./LICENSE).
-- README artwork (hero and creator card) generated with Google Gemini.
